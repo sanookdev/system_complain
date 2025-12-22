@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
     base: isProduction ? `${env.VITE_BASE_PATH_PRODUCTION}/` : `${env.VITE_BASE_PATH}/`, // ✅ ดึงจาก .env
     plugins: [tailwindcss(), vue()],
     build: {
-      outDir: "../Backend/www", // ให้ไปลงโฟลเดอร์ backend/www ตามที่ backend ใช้
+      outDir: "dist", // Changed to dist for PM2 deployment
       emptyOutDir: true,
     },
     resolve: {
@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      port: 5173,
+      port: 5059,
       host: "0.0.0.0", // 👈 เปิดให้รับทุก IP
       // port: 5050, // 👈 ใช้พอร์ตจาก .env หรือ fallback 3000
       allowedHosts: ["med.tu.ac.th"], // ✅ เพิ่ม hostname ที่อนุญาต
