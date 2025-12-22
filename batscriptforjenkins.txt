@@ -1,0 +1,177 @@
+@echo off
+setlocal enabledelayedexpansion
+
+REM ================== CONFIG พื้นฐาน ==================
+REM แก้ path ให้ตรงกับโฟลเดอร์โปรดักชันจริง
+set "PROJECT_ROOT=C:\Users\Administrator\Desktop\services\system_complain_prod"
+set "BACKUP_DIR=%PROJECT_ROOT%\backup"
+
+REM path ของ pm2.cmd (เช็คด้วย where pm2 หรือดูที่เคยใช้)
+set "PM2=C:\Users\Administrator\AppData\Roaming\npm\pm2.cmd"
+
+REM ชื่อ process ใน pm2
+set "PM2_NAME=SYSTEM-COMPLAIN:5059"
+
+REM URL สำหรับ Health Check (ปรับให้ตรงกับของจริง)
+set "HEALTH_URL=https://med.tu.ac.th/complain"
+
+echo === WORKSPACE: %CD% ===
+echo === PROJECT_ROOT: %PROJECT_ROOT% ===
+
+
+REM ================== 0) UPDATE CODE FROM GIT ==================
+echo.
+echo === STEP 0: UPDATE CODE FROM GIT ===
+cd /d "%PROJECT_ROOT%"
+if %ERRORLEVEL% NEQ 0 (
+  echo [ERROR] เข้า PROJECT_ROOT ไม่ได้
+  exit /b 1
+)
+
+REM เช็คว่ามี .git ไหม
+if not exist ".git" (
+  echo [ERROR] ไม่พบ .git ใน %PROJECT_ROOT%
+  echo กรุณา clone โปรเจกต์ไว้ก่อน
+  exit /b 1
+)
+
+echo [INFO] git fetch origin ...
+git fetch origin
+if %ERRORLEVEL% NEQ 0 (
+  echo [ERROR] git fetch origin ล้มเหลว
+  exit /b 1
+)
+
+REM ใช้ reset แบบปลอดภัยกว่า pull
+echo [INFO] git reset --hard origin/main ...
+git reset --hard origin/main
+if %ERRORLEVEL% NEQ 0 (
+  echo [ERROR] git reset ล้มเหลว
+  exit /b 1
+)
+
+echo === GIT UPDATE COMPLETED ===
+
+
+REM ================== 1) เตรียม BACKUP ==================
+echo.
+echo === STEP 1: BACKUP CURRENT VERSION ===
+
+if exist "%BACKUP_DIR%" (
+  echo [INFO] ลบ backup เดิม: "%BACKUP_DIR%"
+  rmdir /s /q "%BACKUP_DIR%"
+)
+
+mkdir "%BACKUP_DIR%"
+if %ERRORLEVEL% NEQ 0 (
+  echo [ERROR] สร้างโฟลเดอร์ BACKUP ไม่สำเร็จ
+  exit /b 1
+)
+
+echo [INFO] Backup Backend...
+xcopy "%PROJECT_ROOT%\Backend\*" "%BACKUP_DIR%\Backend\" /E /H /C /I /Y /Q
+if %ERRORLEVEL% GEQ 4 (
+  echo [ERROR] Backup Backend ล้มเหลว
+  exit /b 1
+)
+
+echo [INFO] Backup Frontend...
+xcopy "%PROJECT_ROOT%\*" "%BACKUP_DIR%\Frontend\" /E /H /C /I /Y /Q
+if %ERRORLEVEL% GEQ 4 (
+  echo [ERROR] Backup project ล้มเหลว
+  exit /b 1
+)
+
+echo === BACKUP COMPLETED ===
+
+REM ================== 2) Install & Build Frontend ==================
+echo.
+echo === STEP 2: INSTALL & BUILD FRONTEND ===
+
+cd /d "%PROJECT_ROOT%"
+if %ERRORLEVEL% NEQ 0 (
+  echo [ERROR] เข้าโฟลเดอร์ Project ไม่ได้
+  goto ROLLBACK
+)
+
+echo [INFO] npm install ...
+call npm install
+if %ERRORLEVEL% NEQ 0 (
+  echo [ERROR] npm install Project ล้มเหลว
+  goto ROLLBACK
+)
+
+echo [INFO] npm run build ...
+call npm run build
+if %ERRORLEVEL% NEQ 0 (
+  echo [ERROR] npm run build ล้มเหลว
+  goto ROLLBACK
+)
+
+REM ================== 3) Restart PM2 & Health Check ==================
+echo.
+echo === STEP 3: RESTART PM2 & HEALTH CHECK ===
+
+echo [INFO] Restart PM2 app: %PM2_NAME%
+call "%PM2%" delete "%PM2_NAME%" >nul 2>&1
+
+call "%PM2%" start ecosystem.config.cjs
+if %ERRORLEVEL% NEQ 0 (
+  echo [ERROR] pm2 start ecosystem.config.cjs ล้มเหลว
+  goto ROLLBACK
+)
+
+echo [INFO] รอให้ Server Boot ขึ้น 10 วินาที...
+timeout /t 10 /nobreak >nul
+
+echo [INFO] Health Check: %HEALTH_URL%
+
+for /f "usebackq tokens=1" %%H in (`
+    curl -L -s -o NUL -w "%%{http_code}" "%HEALTH_URL%"
+`) do (
+    set "HTTP_CODE=%%H"
+)
+
+echo PROD Health HTTP_CODE=!HTTP_CODE!
+
+IF NOT "!HTTP_CODE!"=="200" (
+    echo [ERROR] PROD health check failed with HTTP !HTTP_CODE!
+    echo [ERROR] Health Check ไม่ผ่าน
+    goto ROLLBACK
+)
+
+echo [OK] PROD health check passed.
+
+echo.
+echo === DEPLOYMENT SUCCESSFUL ===
+goto END
+
+
+REM ================== ROLLBACK BLOCK ==================
+:ROLLBACK
+echo.
+echo !!! DEPLOYMENT FAILED - START ROLLBACK !!!
+
+echo [INFO] Restore Backend จาก BACKUP...
+xcopy "%BACKUP_DIR%\Backend\*" "%PROJECT_ROOT%\Backend\" /E /H /C /I /Y /Q
+
+echo [INFO] Restore Frontend จาก BACKUP...
+xcopy "%BACKUP_DIR%\Frontend\*" "%PROJECT_ROOT%\Frontend\" /E /H /C /I /Y /Q
+
+echo [INFO] Restart เวอร์ชันเดิมผ่าน PM2...
+cd /d "%PROJECT_ROOT%\Backend"
+call "%PM2%" delete "%PM2_NAME%" >nul 2>&1
+call "%PM2%" start server.js --name "%PM2_NAME%"
+
+echo [INFO] PM2 Logs (50 บรรทัดล่าสุด)...
+call "%PM2%" logs "%PM2_NAME%" --lines 50 --nostream
+
+echo !!! ROLLBACK COMPLETED (EXIT CODE 1) !!!
+exit /b 1
+
+
+REM ================== END ==================
+:END
+echo.
+echo === SCRIPT FINISHED (EXIT CODE 0) ===
+exit /b 0
