@@ -132,6 +132,38 @@
           </div>
         </a>
       </div>
+
+      <!-- Personnel Complaint Box (Full Width) -->
+      <a
+        href="#"
+        target="_blank"
+        class="card bg-base-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-base-200 group relative w-full mb-10"
+      >
+        <div class="card-body p-6 relative z-10 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
+          <div class="p-4 rounded-xl bg-accent/10 text-accent group-hover:scale-110 transition-transform">
+             <LockKeyhole class="w-8 h-8" />
+          </div>
+          
+          <div class="flex-1">
+             <h3 class="font-bold text-xl text-base-content group-hover:text-primary transition-colors">
+              ร้องเรียนสำหรับบุคลากร
+             </h3>
+             <div class="text-sm font-semibold text-primary/70 mb-1">
+              Complaints for Personnel
+             </div>
+             <p class="text-base-content/70 text-sm">
+              ข้อเสนอแนะ สวัสดิการ และสภาพแวดล้อมการทำงาน
+             </p>
+             <p class="text-base-content/50 text-sm">
+              Suggestions, welfare, and work environment.
+             </p>
+          </div>
+
+          <div class="hidden md:block">
+            <ExternalLink class="text-base-content/30 group-hover:text-primary w-6 h-6 transition-colors" />
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </template>
@@ -156,7 +188,7 @@ const generalChannels = ref([
     desc: "งานทะเบียน ตารางเรียน-สอบ และหลักสูตร",
     descEn: "Registration, class schedules, and curriculum.",
     icon: GraduationCap, // ส่ง Object Component (ห้ามใส่ "")
-    link: "#",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSfd2dLDEGr8fbk6CR-anPa_107LBtJzQBc-TwNw6TYT7h-M0g/viewform",
     bgClass: "bg-info/10",
     textClass: "text-info",
   },
@@ -166,7 +198,7 @@ const generalChannels = ref([
     desc: "งานทะเบียน ตารางเรียน-สอบ และหลักสูตร",
     descEn: "Registration, class schedules, and curriculum.",
     icon: GraduationCap, // ส่ง Object Component (ห้ามใส่ "")
-    link: "#",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSc1S6a86JW6OfELDHJ17YI0GOTbl2Ehmjshf8rR2DWiUKH63A/viewform",
     bgClass: "bg-info/10",
     textClass: "text-info",
   },
@@ -175,8 +207,8 @@ const generalChannels = ref([
     titleEn: "Complaints for Residents and Fellows",
     desc: "ทุน กิจกรรม ชมรม และสวัสดิการนิสิต",
     descEn: "Scholarships, activities, clubs, and student welfare.",
-    icon: UsersRound,
-    link: "#",
+    icon: GraduationCap,
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSc6NGZpz7nVgbCl7x5zr21K6pwDvt2Kqj1ObeRYOzE6lOpLcw/viewform",
     bgClass: "bg-secondary/10",
     textClass: "text-secondary",
   },
