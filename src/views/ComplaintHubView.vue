@@ -1,222 +1,143 @@
 <template>
   <div
-    class="min-h-screen bg-base-200 py-10 px-4 font-sans relative overflow-hidden"
+    class="min-h-screen bg-base-200 flex flex-col items-center justify-center py-10 px-4 font-sans relative overflow-hidden"
   >
-    <div
-      class="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none"
-    ></div>
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div
+        class="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-gradient-to-br from-error/10 to-transparent rounded-full blur-[100px] opacity-60"
+      ></div>
+      <div
+        class="absolute top-[20%] -right-[10%] w-[60%] h-[60%] bg-gradient-to-bl from-primary/10 to-transparent rounded-full blur-[100px] opacity-60"
+      ></div>
+    </div>
 
-    <div class="max-w-6xl mx-auto relative z-10">
-      <div class="text-center mb-12">
-        <h1 class="text-3xl md:text-4xl font-extrabold text-base-content mb-2">
+    <div class="max-w-5xl w-full relative z-10">
+      <div class="text-center mb-16 space-y-2">
+        <h1
+          class="text-3xl md:text-5xl font-extrabold text-base-content tracking-tight"
+        >
           ศูนย์รับเรื่องร้องเรียนและข้อเสนอแนะ
         </h1>
-        <h2 class="text-xl md:text-2xl font-semibold text-primary/80 mb-4">
-          ( Complaints and Suggestions Center )
-        </h2>
+        <p class="text-xl text-base-content/60 font-medium">
+          Complaints and Suggestions Center
+        </p>
+        <div
+          class="w-24 h-1.5 bg-gradient-to-r from-error to-primary mx-auto rounded-full mt-4 opacity-80"
+        ></div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         <a
           href="http://203.131.209.137/main/RiskRegister/#/"
           target="_blank"
-          class="group card bg-base-100 border border-error/20 hover:border-error hover:shadow-lg transition-all duration-300 relative overflow-hidden"
+          class="group relative bg-base-100 rounded-3xl p-8 hover:-translate-y-2 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-error/20 border border-transparent hover:border-error/30 overflow-hidden flex flex-col h-full"
         >
           <div
-            class="absolute inset-0 bg-error/5 group-hover:bg-error/10 transition-colors"
+            class="absolute inset-0 bg-gradient-to-br from-error/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-duration-500"
           ></div>
 
-          <div class="card-body flex flex-row items-start gap-4 relative z-10">
+          <ShieldAlert
+            class="absolute -right-6 -bottom-6 w-48 h-48 text-error/5 group-hover:text-error/10 transition-all duration-500 -rotate-12"
+          />
+
+          <div class="relative z-10 flex flex-col h-full">
             <div
-              class="p-4 rounded-xl bg-error text-white shadow-lg shadow-error/30 group-hover:scale-110 transition-transform mt-1"
+              class="w-16 h-16 rounded-2xl bg-error/10 text-error flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300"
             >
               <ShieldAlert class="w-8 h-8" />
             </div>
-            <div class="flex-1">
-              <h2 class="card-title text-error text-xl mb-0">
-                ระบบบริหารความเสี่ยง
-              </h2>
-              <div class="text-error/80 text-sm font-semibold mb-1">
-                Risk Management System
-              </div>
-              <p class="text-base-content/70 text-sm">
-                แจ้งอุบัติการณ์ ความเสี่ยง หรือเหตุฉุกเฉิน
-              </p>
-              <p class="text-base-content/50 text-sm mt-1">
-                Report incidents, risks, or emergencies.
-              </p>
+
+            <h2
+              class="text-2xl font-bold text-base-content mb-1 group-hover:text-error transition-colors"
+            >
+              ระบบบริหารความเสี่ยง
+            </h2>
+            <p
+              class="text-sm font-semibold text-error/80 uppercase tracking-wide mb-4"
+            >
+              Risk Management System
+            </p>
+
+            <p
+              class="text-base-content/70 text-lg leading-relaxed mb-8 flex-grow"
+            >
+              แจ้งอุบัติการณ์ ความเสี่ยง หรือเหตุฉุกเฉินต่างๆ ภายในองค์กร
+              <span class="block text-sm text-base-content/50 mt-1 font-normal"
+                >Report incidents, risks, or emergencies.</span
+              >
+            </p>
+
+            <div
+              class="flex items-center text-error font-semibold group-hover:translate-x-2 transition-transform"
+            >
+              แจ้งเหตุ
+              <ArrowRight class="w-5 h-5 ml-2" />
             </div>
-            <ExternalLink
-              class="text-error/50 group-hover:text-error w-5 h-5"
-            />
           </div>
         </a>
 
         <a
           href="mailto:meddeantu@gmail.com"
           target="_blank"
-          class="group card bg-base-100 border border-primary/20 hover:border-primary hover:shadow-lg transition-all duration-300 relative overflow-hidden"
+          class="group relative bg-base-100 rounded-3xl p-8 hover:-translate-y-2 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/20 border border-transparent hover:border-primary/30 overflow-hidden flex flex-col h-full"
         >
           <div
-            class="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"
+            class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-duration-500"
           ></div>
 
-          <div class="card-body flex flex-row items-start gap-4 relative z-10">
+          <Megaphone
+            class="absolute -right-6 -bottom-6 w-48 h-48 text-primary/5 group-hover:text-primary/10 transition-all duration-500 -rotate-12"
+          />
+
+          <div class="relative z-10 flex flex-col h-full">
             <div
-              class="p-4 rounded-xl bg-primary text-primary-content shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform mt-1"
+              class="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300"
             >
               <Megaphone class="w-8 h-8" />
             </div>
-            <div class="flex-1">
-              <h2 class="card-title text-primary text-xl mb-0">สายตรงคณบดี</h2>
-              <div class="text-primary/80 text-sm font-semibold mb-1">
-                Dean's Direct Line
-              </div>
-              <p class="text-base-content/70 text-sm">
-                ส่งข้อเสนอแนะเชิงนโยบายถึงผู้บริหารสูงสุด
-              </p>
-              <p class="text-base-content/50 text-sm mt-1">
-                Submit policy recommendations directly to the Dean.
-              </p>
-            </div>
-            <ExternalLink
-              class="text-primary/50 group-hover:text-primary w-5 h-5"
-            />
-          </div>
-        </a>
-      </div>
 
-      <div class="relative py-4 mb-8">
-        <div class="absolute inset-0 flex items-center" aria-hidden="true">
-          <div class="w-full border-t border-base-content/10"></div>
-        </div>
-        <div class="relative flex justify-center text-center">
-          <span
-            class="bg-base-200 px-4 text-md text-base-content/50 tracking-wider uppercase"
-          >
-            หน่วยงานและบริการ / Departments & Services
-          </span>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <a
-          v-for="(item, idx) in generalChannels"
-          :key="idx"
-          :href="item.link"
-          target="_blank"
-          class="card bg-base-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-base-200 group relative"
-        >
-          <div class="card-body p-6 relative z-10">
-            <div class="flex justify-between items-start mb-4">
-              <div :class="`p-3 rounded-lg ${item.bgClass} ${item.textClass}`">
-                <component :is="item.icon" class="w-6 h-6" />
-              </div>
-            </div>
-
-            <h3
-              class="font-bold text-lg text-base-content group-hover:text-primary transition-colors"
+            <h2
+              class="text-2xl font-bold text-base-content mb-1 group-hover:text-primary transition-colors"
             >
-              {{ item.title }}
-            </h3>
-            <div class="text-sm font-semibold text-primary/70 mb-2">
-              {{ item.titleEn }}
-            </div>
-
-            <!-- <p class="text-sm text-base-content/70">{{ item.desc }}</p>
-            <p class="text-sm text-base-content/50 mt-1">{{ item.descEn }}</p>  -->
-            <p class="text-sm text-base-content/70">รายละเอียด (ภาษาไทย)</p>
-            <p class="text-sm text-base-content/50 mt-1">
-              รายละเอียด (ภาษาอังกฤษ)
+              สายตรงคณบดี
+            </h2>
+            <p
+              class="text-sm font-semibold text-primary/80 uppercase tracking-wide mb-4"
+            >
+              Dean's Direct Line
             </p>
+
+            <p
+              class="text-base-content/70 text-lg leading-relaxed mb-8 flex-grow"
+            >
+              ส่งข้อเสนอแนะเชิงนโยบาย หรือเรื่องสำคัญถึงผู้บริหารสูงสุดโดยตรง
+              <span class="block text-sm text-base-content/50 mt-1 font-normal"
+                >Submit policy recommendations directly to the Dean.</span
+              >
+            </p>
+
+            <div
+              class="flex items-center text-primary font-semibold group-hover:translate-x-2 transition-transform"
+            >
+              ส่งเรื่องร้องเรียน
+              <ArrowRight class="w-5 h-5 ml-2" />
+            </div>
           </div>
         </a>
       </div>
 
-      <!-- Personnel Complaint Box (Full Width) -->
-      <a
-        href="#"
-        target="_blank"
-        class="card bg-base-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-base-200 group relative w-full mb-10"
-      >
-        <div class="card-body p-6 relative z-10 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-          <div class="p-4 rounded-xl bg-accent/10 text-accent group-hover:scale-110 transition-transform">
-             <LockKeyhole class="w-8 h-8" />
-          </div>
-          
-          <div class="flex-1">
-             <h3 class="font-bold text-xl text-base-content group-hover:text-primary transition-colors">
-              ร้องเรียนสำหรับบุคลากร
-             </h3>
-             <div class="text-sm font-semibold text-primary/70 mb-1">
-              Complaints for Personnel
-             </div>
-             <p class="text-base-content/70 text-sm">
-              ข้อเสนอแนะ สวัสดิการ และสภาพแวดล้อมการทำงาน
-             </p>
-             <p class="text-base-content/50 text-sm">
-              Suggestions, welfare, and work environment.
-             </p>
-          </div>
-
-          <div class="hidden md:block">
-            <ExternalLink class="text-base-content/30 group-hover:text-primary w-6 h-6 transition-colors" />
-          </div>
-        </div>
-      </a>
+      <div class="text-center mt-12 text-base-content/40 text-sm">
+        © Faculty of Medicine, Thammasat University
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import {
-  ShieldAlert,
-  Megaphone,
-  ExternalLink,
-  GraduationCap,
-  UsersRound,
-  MessageSquareText,
-  LockKeyhole, // ใช้ LockKeyhole แทน HeartHandshake เพื่อสื่อถึง Staff/Private
-  ArrowRight,
-} from "lucide-vue-next";
-
-const generalChannels = ref([
-  {
-    title: "ร้องเรียนสำหรับนักศึกษา ป.ตรี",
-    titleEn: "Complaints for Undergraduate Students",
-    desc: "งานทะเบียน ตารางเรียน-สอบ และหลักสูตร",
-    descEn: "Registration, class schedules, and curriculum.",
-    icon: GraduationCap, // ส่ง Object Component (ห้ามใส่ "")
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSfd2dLDEGr8fbk6CR-anPa_107LBtJzQBc-TwNw6TYT7h-M0g/viewform",
-    bgClass: "bg-info/10",
-    textClass: "text-info",
-  },
-  {
-    title: "ร้องเรียนสำหรับนักศึกษา ป.โท-เอก",
-    titleEn: "Complaints for Graduate Students",
-    desc: "งานทะเบียน ตารางเรียน-สอบ และหลักสูตร",
-    descEn: "Registration, class schedules, and curriculum.",
-    icon: GraduationCap, // ส่ง Object Component (ห้ามใส่ "")
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSc1S6a86JW6OfELDHJ17YI0GOTbl2Ehmjshf8rR2DWiUKH63A/viewform",
-    bgClass: "bg-info/10",
-    textClass: "text-info",
-  },
-  {
-    title: "ร้องเรียนสำหรับแพทย์ประจำบ้าน/ต่อยอด",
-    titleEn: "Complaints for Residents and Fellows",
-    desc: "ทุน กิจกรรม ชมรม และสวัสดิการนิสิต",
-    descEn: "Scholarships, activities, clubs, and student welfare.",
-    icon: GraduationCap,
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSc6NGZpz7nVgbCl7x5zr21K6pwDvt2Kqj1ObeRYOzE6lOpLcw/viewform",
-    bgClass: "bg-secondary/10",
-    textClass: "text-secondary",
-  },
-]);
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap");
 
 .font-sans {
   font-family: "Sarabun", ui-sans-serif, system-ui, -apple-system,
