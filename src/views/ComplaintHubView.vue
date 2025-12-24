@@ -139,28 +139,36 @@
         target="_blank"
         class="card bg-base-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-base-200 group relative w-full mb-10"
       >
-        <div class="card-body p-6 relative z-10 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-          <div class="p-4 rounded-xl bg-accent/10 text-accent group-hover:scale-110 transition-transform">
-             <LockKeyhole class="w-8 h-8" />
+        <div
+          class="card-body p-6 relative z-10 flex flex-col md:flex-row items-center gap-6 text-center md:text-left"
+        >
+          <div
+            class="p-4 rounded-xl bg-accent/10 text-accent group-hover:scale-110 transition-transform"
+          >
+            <LockKeyhole class="w-8 h-8" />
           </div>
-          
+
           <div class="flex-1">
-             <h3 class="font-bold text-xl text-base-content group-hover:text-primary transition-colors">
+            <h3
+              class="font-bold text-xl text-base-content group-hover:text-primary transition-colors"
+            >
               ร้องเรียนสำหรับบุคลากร
-             </h3>
-             <div class="text-sm font-semibold text-primary/70 mb-1">
+            </h3>
+            <div class="text-sm font-semibold text-primary/70 mb-1">
               Complaints for Personnel
-             </div>
-             <p class="text-base-content/70 text-sm">
+            </div>
+            <p class="text-base-content/70 text-sm">
               ข้อเสนอแนะ สวัสดิการ และสภาพแวดล้อมการทำงาน
-             </p>
-             <p class="text-base-content/50 text-sm">
+            </p>
+            <p class="text-base-content/50 text-sm">
               Suggestions, welfare, and work environment.
-             </p>
+            </p>
           </div>
 
           <div class="hidden md:block">
-            <ExternalLink class="text-base-content/30 group-hover:text-primary w-6 h-6 transition-colors" />
+            <ExternalLink
+              class="text-base-content/30 group-hover:text-primary w-6 h-6 transition-colors"
+            />
           </div>
         </div>
       </a>
