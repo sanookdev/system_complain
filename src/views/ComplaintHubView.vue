@@ -26,7 +26,7 @@
         ></div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
         <a
           href="http://203.131.209.137/main/RiskRegister/#/"
           target="_blank"
@@ -120,6 +120,54 @@
               class="flex items-center text-primary font-semibold group-hover:translate-x-2 transition-transform"
             >
               ส่งเรื่องร้องเรียน
+              <ArrowRight class="w-5 h-5 ml-2" />
+            </div>
+          </div>
+        </a>
+
+        <a
+          href="https://med.tu.ac.th/complain-form/#/"
+          class="group relative bg-base-100 rounded-3xl p-8 hover:-translate-y-2 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-warning/20 border border-transparent hover:border-warning/30 overflow-hidden flex flex-col h-full"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-warning/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-duration-500"
+          ></div>
+
+          <MessageSquareWarning
+            class="absolute -right-6 -bottom-6 w-48 h-48 text-warning/5 group-hover:text-warning/10 transition-all duration-500 -rotate-12"
+          />
+
+          <div class="relative z-10 flex flex-col h-full">
+            <div
+              class="w-16 h-16 rounded-2xl bg-warning/10 text-warning flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300"
+            >
+              <MessageSquareWarning class="w-8 h-8" />
+            </div>
+
+            <h2
+              class="text-2xl font-bold text-base-content mb-1 group-hover:text-warning transition-colors"
+            >
+              ระบบรับเรื่องร้องเรียนและข้อเสนอแนะ
+            </h2>
+            <p
+              class="text-sm font-semibold text-warning/80 uppercase tracking-wide mb-4"
+            >
+              Complaints & Suggestions System
+            </p>
+
+            <p
+              class="text-base-content/70 text-lg leading-relaxed mb-8 flex-grow"
+            >
+              รับเรื่องร้องเรียน ข้อเสนอแนะ และความคิดเห็นจากบุคลากรและผู้รับบริการ
+              <span class="block text-sm text-base-content/50 mt-1 font-normal"
+                >Submit complaints, suggestions, and feedback.</span
+              >
+            </p>
+
+            <div
+              class="flex items-center text-warning font-semibold group-hover:translate-x-2 transition-transform"
+            >
+              ส่งเรื่อง
               <ArrowRight class="w-5 h-5 ml-2" />
             </div>
           </div>
